@@ -1,10 +1,8 @@
-import axios from 'axios';
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
 
 import { getCompanyList, checkIPO } from '../src/api';
 import ResultTable from '../src/components/ResultTable';
-import SelectCompany from '../src/components/SelectCompany';
 
 export default function Home() {
 
@@ -39,11 +37,10 @@ export default function Home() {
 
   const handleSubmit = async (event) => {
 
-    // checkIPO({ companyShareId: 20, boid: '1301090000365301' });
     const boids = BOIDs.split(',');
     const promises = [];
     boids.forEach(boid => {
-      const promise = checkIPODummy({ companyId, boid }); 
+      checkIPO({ companyShareId: companyId, boid });
       promises.push(promise);
     });
 
@@ -65,7 +62,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <SelectCompany /> */}
       <form onSubmit={handleSubmit}>
         <div className="">
           <label htmlFor="company" className="block text-sm font-medium text-gray-700">
@@ -99,9 +95,9 @@ export default function Home() {
             />
           </div>
 
-          <button type="submit" className="mt-2 px-5 py-3 rounded-md text-white bg-indigo-600" onClick={async () => {
-            // checkIPO({ companyShareId: 20, boid: '1301090000365301' });
-          }} > Check Result </button>
+          <button type="submit" className="mt-2 px-5 py-3 rounded-md text-white bg-indigo-600">
+            Check Result
+          </button>
         </div>
       </form>
 

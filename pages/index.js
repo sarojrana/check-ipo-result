@@ -18,6 +18,7 @@ export default function Home() {
     });
 
     setCompanyList(sortedList);
+    setCompanyId(sortedList[0].id);
   }
 
   const handleInputChange = (event) => {
@@ -36,19 +37,17 @@ export default function Home() {
   const checkIPODummy = (payload) => Promise.resolve({ boid: payload.boid, message: 'Awesome', success: true });
 
   const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const boids = BOIDs.split(',');
     const promises = [];
     boids.forEach(boid => {
-      checkIPO({ companyShareId: companyId, boid });
+      const promise = checkIPO({ companyShareId: companyId, boid });
       promises.push(promise);
     });
 
     const results = await Promise.all(promises);
-
     setIPOresult(results);
-
-    event.preventDefault();
   }
 
   useEffect(() => {

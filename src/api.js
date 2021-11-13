@@ -21,8 +21,10 @@ export const checkIPO = async (payload) => {
   try {
     const response = await axios.post(IPO_CHECK_API, payload);
     
-    return { ...response.data, body: payload.boid };
+    return { ...response.data, boid: payload.boid };
   } catch (err) {
     console.log(err);
+
+    return { boid: payload.boid, message: 'Failed to process, please retry.', success: false }
   }
 };

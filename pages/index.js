@@ -13,7 +13,7 @@ export default function Home() {
 
   const fetchCompanyList = async () => {
     const companies = await getCompanyList();
-    const sortedList = companies.sort((a, b) => {
+    const sortedList = companies.companyShareList.sort((a, b) => {
       return b.id - a.id
     });
 
